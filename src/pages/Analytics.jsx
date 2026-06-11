@@ -41,8 +41,8 @@ function percent(count, total) {
 function CustomTooltip({ active, payload, label }) {
   if (!active || !payload?.length) return null;
   return (
-    <div className="bg-white dark:bg-neutral-800 border-3 border-black dark:border-white rounded-xl p-3 shadow-neo text-sm">
-      <p className="font-bold text-gray-600 dark:text-gray-300 mb-2">{label}</p>
+    <div className="bg-white dark:bg-neutral-950 border-3 border-black dark:border-violet-200 rounded-xl p-3 shadow-neo dark:shadow-[3px_3px_0px_0px_rgba(221,214,254,0.24)] text-sm">
+      <p className="font-bold text-gray-600 dark:text-violet-100 mb-2">{label}</p>
       {payload.map((entry) => (
         <p key={entry.dataKey} style={{ color: entry.color }} className="font-bold">
           {entry.name}: {typeof entry.value === 'number' ? entry.value.toFixed(1) : entry.value} {entry.unit || ''}
@@ -174,14 +174,14 @@ export default function Analytics() {
     return (
       <div className="space-y-6">
         <div>
-          <h1 className="text-2xl font-black text-gray-900 dark:text-white mb-1 uppercase tracking-tight">Analitik</h1>
-          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Statistik dan tren data sensor.</p>
+          <h1 className="text-2xl neo-section-title mb-1">Analitik</h1>
+          <p className="text-sm font-medium neo-muted">Statistik dan tren data sensor.</p>
         </div>
-        <div className="bg-white dark:bg-neutral-800 rounded-xl p-8 border-4 border-black dark:border-white shadow-neo text-center">
-          <div className="p-4 rounded-xl border-3 border-black dark:border-white bg-cream-100 dark:bg-neutral-900 shadow-neo-sm inline-block mb-4">
-            <BarChart3 size={32} className="text-gray-400" />
+        <div className="neo-panel p-8 text-center">
+          <div className="p-4 rounded-xl border-3 border-black dark:border-violet-200 bg-cream-100 dark:bg-violet-950 shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(221,214,254,0.24)] inline-block mb-4">
+            <BarChart3 size={32} className="text-gray-400 dark:text-violet-200" />
           </div>
-          <p className="text-gray-500 dark:text-gray-400 font-medium">
+          <p className="text-gray-500 dark:text-violet-200/75 font-medium">
             Belum ada data untuk dianalisis. Buka dashboard untuk mulai menerima data.
           </p>
         </div>
@@ -193,8 +193,8 @@ export default function Analytics() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-black text-gray-900 dark:text-white mb-1 uppercase tracking-tight">Analitik</h1>
-        <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
+        <h1 className="text-2xl neo-section-title mb-1">Analitik</h1>
+        <p className="text-sm font-medium neo-muted">
           {history.length} pembacaan. Data bersifat lokal selama dashboard aktif.
         </p>
       </div>
@@ -202,19 +202,19 @@ export default function Analytics() {
       {/* Summary cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         {summaryCards.map(({ label, value, unit, icon: Icon, bg, iconBg, valueColor, note }) => (
-          <div key={label} className={`${bg} rounded-xl p-5 border-4 border-black dark:border-white shadow-neo transition-transform hover:-translate-y-1`}>
+          <div key={label} className={`${bg} rounded-xl p-5 border-4 border-black dark:border-violet-200 shadow-neo dark:shadow-[5px_5px_0px_0px_rgba(221,214,254,0.22)] transition-transform hover:-translate-y-1`}>
             <div className="flex items-start justify-between gap-3 mb-5">
               <div>
-                <p className="text-xs font-black uppercase text-black/60 dark:text-white/70 tracking-wider">{label}</p>
-                <p className="mt-1 text-xs font-bold text-black/55 dark:text-white/60">{note}</p>
+                <p className="text-xs font-black uppercase text-black/60 dark:text-violet-100/80 tracking-wider">{label}</p>
+                <p className="mt-1 text-xs font-bold text-black/55 dark:text-violet-200/65">{note}</p>
               </div>
-              <div className={`${iconBg} border-3 border-black dark:border-white rounded-xl p-3 shadow-neo-sm shrink-0`}>
-                <Icon size={22} className="text-black dark:text-white" />
+              <div className={`${iconBg} border-3 border-black dark:border-violet-100 rounded-xl p-3 shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(221,214,254,0.22)] shrink-0`}>
+                <Icon size={22} className="text-black dark:text-violet-50" />
               </div>
             </div>
             <div className="flex items-end justify-between gap-3">
               <p className={`text-4xl font-black tracking-tight ${valueColor}`}>{value}</p>
-              <span className="mb-1 rounded-lg border-2 border-black dark:border-white bg-white dark:bg-neutral-900 px-2.5 py-1 text-xs font-black text-black dark:text-white shadow-neo-sm">
+              <span className="mb-1 rounded-lg border-2 border-black dark:border-violet-200 bg-white dark:bg-neutral-950 px-2.5 py-1 text-xs font-black text-black dark:text-violet-50 shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(221,214,254,0.2)]">
                 {unit}
               </span>
             </div>
@@ -225,12 +225,12 @@ export default function Analytics() {
       {/* Status counts */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         {statusCards.map(({ label, count, icon: Icon, bg, iconBg, text }) => (
-          <div key={label} className={`${bg} rounded-xl p-5 border-4 border-black dark:border-white shadow-neo-sm`}>
+          <div key={label} className={`${bg} rounded-xl p-5 border-4 border-black dark:border-violet-100 shadow-neo-sm dark:shadow-[3px_3px_0px_0px_rgba(221,214,254,0.22)]`}>
             <div className="flex items-center justify-between gap-3 mb-4">
-              <div className={`rounded-xl border-3 border-black dark:border-white ${iconBg} p-2.5 shadow-neo-sm`}>
-                <Icon size={20} className="text-black dark:text-white" />
+              <div className={`rounded-xl border-3 border-black dark:border-violet-100 ${iconBg} p-2.5 shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(221,214,254,0.2)]`}>
+                <Icon size={20} className="text-black dark:text-violet-50" />
               </div>
-              <span className="rounded-full border-2 border-black dark:border-white bg-white dark:bg-neutral-900 px-3 py-1 text-xs font-black text-black dark:text-white">
+              <span className="rounded-full border-2 border-black dark:border-violet-200 bg-white dark:bg-neutral-950 px-3 py-1 text-xs font-black text-black dark:text-violet-50">
                 {percent(count, history.length)}%
               </span>
             </div>
@@ -245,35 +245,35 @@ export default function Analytics() {
 
       {/* Pie chart */}
       {pieData.length > 0 && (
-        <div className="bg-white dark:bg-neutral-800 rounded-xl p-6 border-4 border-black dark:border-white shadow-neo">
-          <h3 className="font-black text-gray-700 dark:text-gray-200 mb-4 uppercase tracking-tight">Distribusi Status</h3>
+        <div className="neo-panel p-6">
+          <h3 className="neo-section-title mb-4">Distribusi Status</h3>
           <ResponsiveContainer width="100%" height={240}>
             <PieChart>
               <PieTooltip content={<CustomTooltip />} />
               <Pie data={pieData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={90} label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}>
                 {pieData.map((entry) => (
-                  <Cell key={entry.name} fill={entry.color} stroke="#000" strokeWidth={2} />
+                  <Cell key={entry.name} fill={entry.color} stroke="var(--chart-axis)" strokeWidth={2} />
                 ))}
               </Pie>
-              <Legend wrapperStyle={{ fontSize: 12, fontWeight: 'bold' }} />
+              <Legend wrapperStyle={{ fontSize: 12, fontWeight: 'bold', color: 'var(--chart-axis)' }} />
             </PieChart>
           </ResponsiveContainer>
         </div>
       )}
 
       {/* Trend charts */}
-      <div className="bg-white dark:bg-neutral-800 rounded-xl p-6 border-4 border-black dark:border-white shadow-neo">
-        <h3 className="font-black text-gray-700 dark:text-gray-200 mb-4 uppercase tracking-tight">Tren Data</h3>
+      <div className="neo-panel p-6">
+        <h3 className="neo-section-title mb-4">Tren Data</h3>
         <ResponsiveContainer width="100%" height={260}>
           <LineChart data={trendData} margin={{ top: 5, right: 10, left: -20, bottom: 5 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#d1d5db" />
-            <XAxis dataKey="time" tick={{ fontSize: 11, fontWeight: 'bold' }} tickLine={false} axisLine={{ stroke: '#000', strokeWidth: 2 }} />
-            <YAxis tick={{ fontSize: 11, fontWeight: 'bold' }} tickLine={false} axisLine={{ stroke: '#000', strokeWidth: 2 }} />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" />
+            <XAxis dataKey="time" tick={{ fontSize: 11, fontWeight: 'bold', fill: 'var(--chart-axis)' }} tickLine={false} axisLine={{ stroke: 'var(--chart-axis)', strokeWidth: 2 }} />
+            <YAxis tick={{ fontSize: 11, fontWeight: 'bold', fill: 'var(--chart-axis)' }} tickLine={false} axisLine={{ stroke: 'var(--chart-axis)', strokeWidth: 2 }} />
             <Tooltip content={<CustomTooltip />} />
-            <Legend wrapperStyle={{ fontSize: 12, fontWeight: 'bold' }} />
-            <Line type="monotone" dataKey="Suhu" stroke="#ef4444" strokeWidth={3} dot={{ fill: '#000', strokeWidth: 2, r: 4 }} name="Suhu (°C)" unit="°C" />
-            <Line type="monotone" dataKey="Kelembaban" stroke="#3b82f6" strokeWidth={3} dot={{ fill: '#000', strokeWidth: 2, r: 4 }} name="Kelembaban (%)" unit="%" />
-            <Line type="monotone" dataKey="Skor Risiko" stroke="#f97316" strokeWidth={3} dot={{ fill: '#000', strokeWidth: 2, r: 4 }} name="Skor Risiko" />
+            <Legend wrapperStyle={{ fontSize: 12, fontWeight: 'bold', color: 'var(--chart-axis)' }} />
+            <Line type="monotone" dataKey="Suhu" stroke="#ef4444" strokeWidth={3} dot={{ fill: 'var(--chart-dot)', strokeWidth: 2, r: 4 }} name="Suhu (°C)" unit="°C" />
+            <Line type="monotone" dataKey="Kelembaban" stroke="#3b82f6" strokeWidth={3} dot={{ fill: 'var(--chart-dot)', strokeWidth: 2, r: 4 }} name="Kelembaban (%)" unit="%" />
+            <Line type="monotone" dataKey="Skor Risiko" stroke="#f97316" strokeWidth={3} dot={{ fill: 'var(--chart-dot)', strokeWidth: 2, r: 4 }} name="Skor Risiko" />
           </LineChart>
         </ResponsiveContainer>
       </div>

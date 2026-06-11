@@ -1,3 +1,40 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --chart-grid: #d1d5db;
+    --chart-axis: #000000;
+    --chart-dot: #000000;
+  }
+
+  .dark {
+    color-scheme: dark;
+    --chart-grid: #3f3f46;
+    --chart-axis: #ede9fe;
+    --chart-dot: #f5f3ff;
+  }
+}
+
+@layer components {
+  .neo-panel {
+    @apply bg-white dark:bg-neutral-900 border-4 border-black dark:border-violet-200 rounded-xl shadow-neo dark:shadow-[5px_5px_0px_0px_rgba(221,214,254,0.28)];
+  }
+
+  .neo-panel-soft {
+    @apply bg-white dark:bg-neutral-900/95 border-4 border-black dark:border-violet-200 rounded-xl shadow-neo-sm dark:shadow-[3px_3px_0px_0px_rgba(221,214,254,0.24)];
+  }
+
+  .neo-control {
+    @apply border-2 border-black dark:border-violet-200 bg-white dark:bg-neutral-950 text-black dark:text-violet-50 shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(221,214,254,0.24)];
+  }
+
+  .neo-section-title {
+    @apply font-black text-gray-800 dark:text-violet-50 uppercase tracking-tight;
+  }
+
+  .neo-muted {
+    @apply text-gray-600 dark:text-violet-200/75;
+  }
+}
