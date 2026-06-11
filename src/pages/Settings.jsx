@@ -19,7 +19,7 @@ export default function Settings() {
   };
 
   return (
-    <div className="space-y-6 max-w-2xl">
+    <div className="space-y-6">
       {/* Header */}
       <div>
         <h1 className="text-2xl neo-section-title mb-1">Pengaturan</h1>
@@ -31,88 +31,90 @@ export default function Settings() {
       </div>
 
       {/* Firebase info */}
-      <section className="neo-panel p-6 space-y-4">
+      <section className="neo-panel p-6 space-y-5">
         <div className="flex items-center gap-3 mb-2">
           <div className="p-2 rounded-lg border-2 border-black dark:border-blue-200 bg-blue-200 dark:bg-blue-950 shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(191,219,254,0.22)]">
             <Database size={18} className="text-blue-600 dark:text-blue-300" />
           </div>
           <h2 className="neo-section-title">Firebase Configuration</h2>
         </div>
-        <div className="space-y-3 text-sm">
-          <div className="flex flex-col sm:flex-row sm:justify-between gap-2">
-            <span className="font-bold neo-muted uppercase text-xs tracking-wider">Database URL</span>
-            <code className="text-gray-800 dark:text-violet-100 bg-cream-100 dark:bg-neutral-950 px-3 py-2 rounded-lg border-2 border-black dark:border-violet-200 font-mono text-xs break-all">
+        <div className="grid gap-4 text-sm lg:grid-cols-2">
+          <div className="space-y-2 rounded-xl border-3 border-black dark:border-violet-200 bg-cream-100 dark:bg-neutral-950 p-4">
+            <span className="font-black neo-muted uppercase text-xs tracking-wider">Database URL</span>
+            <code className="block w-full text-gray-800 dark:text-violet-100 bg-white dark:bg-neutral-900 px-3 py-2 rounded-lg border-2 border-black dark:border-violet-200 font-mono text-xs break-all">
               {FIREBASE_DB_URL}
             </code>
           </div>
-          <div className="flex flex-col sm:flex-row sm:justify-between gap-2">
-            <span className="font-bold neo-muted uppercase text-xs tracking-wider">Path</span>
-            <code className="text-gray-800 dark:text-violet-100 bg-cream-100 dark:bg-neutral-950 px-3 py-2 rounded-lg border-2 border-black dark:border-violet-200 font-mono text-xs">
+          <div className="space-y-2 rounded-xl border-3 border-black dark:border-violet-200 bg-cream-100 dark:bg-neutral-950 p-4">
+            <span className="font-black neo-muted uppercase text-xs tracking-wider">Path</span>
+            <code className="block w-full text-gray-800 dark:text-violet-100 bg-white dark:bg-neutral-900 px-3 py-2 rounded-lg border-2 border-black dark:border-violet-200 font-mono text-xs break-all">
               {FIREBASE_PATH}
             </code>
           </div>
         </div>
       </section>
 
-      {/* Refresh interval */}
-      <section className="neo-panel p-6 space-y-4">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="p-2 rounded-lg border-2 border-black dark:border-emerald-200 bg-green-200 dark:bg-emerald-950 shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(167,243,208,0.22)]">
-            <RefreshCw size={18} className="text-green-600 dark:text-green-300" />
-          </div>
-          <h2 className="neo-section-title">Refresh Interval</h2>
-        </div>
-        <div className="flex items-center flex-wrap gap-3">
-          <input
-            type="number"
-            min={5}
-            max={60}
-            value={refreshInput}
-            onChange={(e) => setRefreshInput(Number(e.target.value))}
-            className="w-24 px-4 py-3 border-3 border-black dark:border-violet-200 rounded-xl text-sm bg-cream-100 dark:bg-neutral-950 text-gray-900 dark:text-violet-50 font-bold focus:outline-none focus:ring-0"
-          />
-          <span className="text-sm font-bold neo-muted">detik</span>
-          <button
-            onClick={handleRefreshChange}
-            className={`flex items-center gap-2 px-4 py-3 font-bold border-3 border-black rounded-xl text-sm transition-all active:scale-95 ${
-              saved
-                ? 'bg-green-400 dark:bg-emerald-500 text-black dark:border-emerald-100 shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(167,243,208,0.24)]'
-                : 'bg-yellow-300 hover:bg-yellow-400 dark:bg-yellow-400 dark:hover:bg-yellow-300 text-black dark:border-yellow-100 shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(254,240,138,0.24)]'
-            }`}
-          >
-            <Save size={16} />
-            {saved ? 'Tersimpan!' : 'Simpan'}
-          </button>
-        </div>
-        <p className="text-xs font-medium neo-muted">Minimal 5 detik, maksimal 60 detik.</p>
-      </section>
-
-      {/* Dark mode */}
-      <section className="neo-panel p-6">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className={`p-2 rounded-lg border-2 border-black dark:border-violet-200 shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(221,214,254,0.22)] ${darkMode ? 'bg-violet-950' : 'bg-orange-200'}`}>
-              {darkMode ? <Moon size={18} className="text-yellow-300" /> : <Sun size={18} className="text-orange-600" />}
+      <div className="grid gap-6 lg:grid-cols-2">
+        {/* Refresh interval */}
+        <section className="neo-panel p-6 space-y-4">
+          <div className="flex items-center gap-3 mb-2">
+            <div className="p-2 rounded-lg border-2 border-black dark:border-emerald-200 bg-green-200 dark:bg-emerald-950 shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(167,243,208,0.22)]">
+              <RefreshCw size={18} className="text-green-600 dark:text-green-300" />
             </div>
-            <div>
-              <h2 className="neo-section-title">Dark Mode</h2>
-              <p className="text-sm font-medium neo-muted">Aktifkan tema gelap.</p>
-            </div>
+            <h2 className="neo-section-title">Refresh Interval</h2>
           </div>
-          <button
-            onClick={toggleDarkMode}
-            className={`relative w-14 h-8 rounded-xl border-3 border-black dark:border-violet-200 transition-colors ${
-              darkMode ? 'bg-violet-950' : 'bg-cream-200'
-            }`}
-          >
-            <span
-              className={`absolute top-1 w-5 h-5 rounded-lg bg-yellow-300 dark:bg-violet-200 border-2 border-black transition-all ${
-                darkMode ? 'left-7' : 'left-1'
-              }`}
+          <div className="flex items-center flex-wrap gap-3">
+            <input
+              type="number"
+              min={5}
+              max={60}
+              value={refreshInput}
+              onChange={(e) => setRefreshInput(Number(e.target.value))}
+              className="w-24 px-4 py-3 border-3 border-black dark:border-violet-200 rounded-xl text-sm bg-cream-100 dark:bg-neutral-950 text-gray-900 dark:text-violet-50 font-bold focus:outline-none focus:ring-0"
             />
-          </button>
-        </div>
-      </section>
+            <span className="text-sm font-bold neo-muted">detik</span>
+            <button
+              onClick={handleRefreshChange}
+              className={`flex items-center gap-2 px-4 py-3 font-bold border-3 border-black rounded-xl text-sm transition-all active:scale-95 ${
+                saved
+                  ? 'bg-green-400 dark:bg-emerald-500 text-black dark:border-emerald-100 shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(167,243,208,0.24)]'
+                  : 'bg-yellow-300 hover:bg-yellow-400 dark:bg-yellow-400 dark:hover:bg-yellow-300 text-black dark:border-yellow-100 shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(254,240,138,0.24)]'
+              }`}
+            >
+              <Save size={16} />
+              {saved ? 'Tersimpan!' : 'Simpan'}
+            </button>
+          </div>
+          <p className="text-xs font-medium neo-muted">Minimal 5 detik, maksimal 60 detik.</p>
+        </section>
+
+        {/* Dark mode */}
+        <section className="neo-panel p-6">
+          <div className="flex h-full items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className={`p-2 rounded-lg border-2 border-black dark:border-violet-200 shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(221,214,254,0.22)] ${darkMode ? 'bg-violet-950' : 'bg-orange-200'}`}>
+                {darkMode ? <Moon size={18} className="text-yellow-300" /> : <Sun size={18} className="text-orange-600" />}
+              </div>
+              <div>
+                <h2 className="neo-section-title">Dark Mode</h2>
+                <p className="text-sm font-medium neo-muted">Aktifkan tema gelap.</p>
+              </div>
+            </div>
+            <button
+              onClick={toggleDarkMode}
+              className={`relative h-8 w-14 shrink-0 rounded-xl border-3 border-black dark:border-violet-200 transition-colors ${
+                darkMode ? 'bg-violet-950' : 'bg-cream-200'
+              }`}
+            >
+              <span
+                className={`absolute top-1 w-5 h-5 rounded-lg bg-yellow-300 dark:bg-violet-200 border-2 border-black transition-all ${
+                  darkMode ? 'left-7' : 'left-1'
+                }`}
+              />
+            </button>
+          </div>
+        </section>
+      </div>
 
       {/* System limitations */}
       <section className="neo-panel p-6 space-y-4">
