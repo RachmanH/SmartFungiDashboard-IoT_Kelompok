@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useApp } from '../contexts/AppContext';
-import { RefreshCw, Database, AlertTriangle, Moon, Sun, Save } from 'lucide-react';
+import { AlertTriangle, Bird, Database, Moon, RefreshCw, Save, Sun } from 'lucide-react';
 
 const FIREBASE_DB_URL = import.meta.env.VITE_FIREBASE_DB_URL;
 const FIREBASE_PATH = import.meta.env.VITE_FIREBASE_PATH;
@@ -24,6 +24,10 @@ export default function Settings() {
       <div>
         <h1 className="text-2xl neo-section-title mb-1">Pengaturan</h1>
         <p className="text-sm font-medium neo-muted">Konfigurasi dashboard Smart Fungi Alert.</p>
+        <span className="bird-tag mt-3">
+          <Bird size={14} />
+          Profil Kandang Murai
+        </span>
       </div>
 
       {/* Firebase info */}
@@ -119,6 +123,10 @@ export default function Settings() {
           <h2 className="neo-section-title">Batasan Sistem</h2>
         </div>
         <ul className="space-y-2 text-sm font-medium text-gray-700 dark:text-violet-100/85">
+          <li className="flex items-start gap-2">
+            <span className="w-2 h-2 mt-2 rounded-full bg-black dark:bg-white shrink-0" />
+            Tema visual berfokus pada monitoring kandang burung murai.
+          </li>
           <li className="flex items-start gap-2">
             <span className="w-2 h-2 mt-2 rounded-full bg-black dark:bg-white shrink-0" />
             Dashboard hanya membaca data dari Firebase.

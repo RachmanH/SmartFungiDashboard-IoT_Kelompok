@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, History, BarChart3, Settings, Moon, Sun } from 'lucide-react';
+import { BarChart3, Bird, History, LayoutDashboard, Moon, Settings, Sun } from 'lucide-react';
 import { useApp } from '../contexts/AppContext';
 import { useDarkMode } from '../hooks/useDarkMode';
 
@@ -21,8 +21,10 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center gap-8">
             <Link to="/" className="flex items-center gap-2 font-black text-xl tracking-tight text-black dark:text-violet-50">
-              <span className="text-3xl">🍄</span>
-              <span>Smart Fungi Alert</span>
+              <span className="grid h-9 w-9 place-items-center rounded-xl border-2 border-black dark:border-amber-100 bg-amber-200 dark:bg-amber-950 shadow-neo-sm">
+                <Bird size={19} />
+              </span>
+              <span>Murai Monitor</span>
             </Link>
             <div className="hidden md:flex gap-1">
               {navItems.map(({ to, label, icon: Icon }) => {

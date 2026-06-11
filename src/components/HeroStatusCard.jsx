@@ -1,4 +1,4 @@
-import { AlertCircle, AlertTriangle, CheckCircle2, Flame } from 'lucide-react';
+import { AlertCircle, AlertTriangle, Bird, CheckCircle2, Flame } from 'lucide-react';
 
 const STATUS_CONFIG = {
   'Kondisi Aman': {
@@ -76,9 +76,13 @@ export default function HeroStatusCard({ status, riskScore, tempDewDiff, loading
             <Icon size={32} className={config.labelText} />
           </div>
           <div>
+            <span className="bird-tag mb-3">
+              <Bird size={14} />
+              Kandang Murai
+            </span>
             <h2 className="text-2xl font-black mb-1 uppercase tracking-tight">{status}</h2>
             <p className="text-sm font-bold opacity-75">
-              Skor Risiko: <span className="font-black">{riskScore ?? '-'} / 100</span>
+              Skor lingkungan kandang: <span className="font-black">{riskScore ?? '-'} / 100</span>
             </p>
             {isCondensation && (
               <p className="mt-3 text-sm font-bold text-red-800 dark:text-red-200 bg-white/50 dark:bg-black/30 px-3 py-1 rounded-lg border-2 border-red-900 dark:border-red-200">

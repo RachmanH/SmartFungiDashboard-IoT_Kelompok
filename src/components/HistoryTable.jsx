@@ -1,5 +1,6 @@
 import { formatTimestamp } from '../utils/format';
 import StatusBadge from './StatusBadge';
+import { Bird } from 'lucide-react';
 
 export default function HistoryTable({ data, maxRows = 10 }) {
   const rows = data.slice(0, maxRows);
@@ -9,7 +10,8 @@ export default function HistoryTable({ data, maxRows = 10 }) {
         <div className="neo-panel p-6">
         <h3 className="neo-section-title mb-4">Riwayat Terbaru</h3>
         <div className="text-center text-gray-400 dark:text-violet-200/60 text-sm font-medium py-8 border-2 border-dashed border-gray-300 dark:border-violet-300/40 rounded-lg">
-          Belum ada data riwayat.
+          <Bird size={28} className="mx-auto mb-2 text-amber-500 dark:text-amber-200" />
+          Belum ada jejak pembacaan kandang.
         </div>
       </div>
     );

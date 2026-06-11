@@ -15,9 +15,75 @@
     --chart-axis: #ede9fe;
     --chart-dot: #f5f3ff;
   }
+
+  @media (pointer: fine) {
+    body {
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M5 6 L8 24 L13 17 L20 26 L23 24 L16 15 L25 13 Z' fill='%23fbbf24' stroke='%23000' stroke-width='2' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='13' r='2' fill='%23000'/%3E%3C/svg%3E") 5 5, auto;
+    }
+
+    a,
+    button,
+    select,
+    summary,
+    [role="button"],
+    .neo-control,
+    input[type="checkbox"],
+    input[type="radio"] {
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M6 18 C9 8 20 5 26 8 C22 10 19 14 18 19 C14 17 10 17 6 18 Z' fill='%23fde68a' stroke='%23000' stroke-width='2'/%3E%3Cpath d='M11 19 C13 23 17 25 22 25' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") 8 8, pointer;
+    }
+
+    input,
+    textarea,
+    [contenteditable="true"] {
+      cursor: text;
+    }
+  }
+
+  @keyframes murai-float {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-10px) rotate(2deg); }
+  }
+
+  @keyframes murai-wing {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(12deg); }
+  }
+
+  @keyframes murai-tail {
+    0%, 100% { transform: rotate(2deg); }
+    50% { transform: rotate(-8deg); }
+  }
+
+  @keyframes murai-note {
+    0% { opacity: 0; transform: translateY(8px) scale(0.85); }
+    25% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(-22px) scale(1); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .murai-bird,
+    .murai-wing,
+    .murai-tail,
+    .murai-note {
+      animation: none !important;
+    }
+  }
 }
 
 @layer components {
+  .bird-shell {
+    background-image:
+      radial-gradient(circle at 12px 12px, rgba(0, 0, 0, 0.05) 2px, transparent 2px),
+      linear-gradient(135deg, rgba(251, 191, 36, 0.16) 0 12%, transparent 12% 100%);
+    background-size: 34px 34px, 100% 100%;
+  }
+
+  .dark .bird-shell {
+    background-image:
+      radial-gradient(circle at 12px 12px, rgba(221, 214, 254, 0.1) 2px, transparent 2px),
+      linear-gradient(135deg, rgba(124, 58, 237, 0.16) 0 14%, transparent 14% 100%);
+  }
+
   .neo-panel {
     @apply bg-white dark:bg-neutral-900 border-4 border-black dark:border-violet-200 rounded-xl shadow-neo dark:shadow-[5px_5px_0px_0px_rgba(221,214,254,0.28)];
   }
@@ -36,5 +102,29 @@
 
   .neo-muted {
     @apply text-gray-600 dark:text-violet-200/75;
+  }
+
+  .bird-tag {
+    @apply inline-flex items-center gap-2 rounded-full border-2 border-black dark:border-amber-100 bg-amber-200 dark:bg-amber-950 px-3 py-1 text-xs font-black uppercase tracking-wider text-black dark:text-amber-50 shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(253,230,138,0.22)];
+  }
+
+  .murai-bird {
+    animation: murai-float 4.5s ease-in-out infinite;
+  }
+
+  .murai-wing {
+    transform-box: fill-box;
+    transform-origin: 32px 36px;
+    animation: murai-wing 1.7s ease-in-out infinite;
+  }
+
+  .murai-tail {
+    transform-box: fill-box;
+    transform-origin: 50px 42px;
+    animation: murai-tail 2.4s ease-in-out infinite;
+  }
+
+  .murai-note {
+    animation: murai-note 2.6s ease-in-out infinite;
   }
 }

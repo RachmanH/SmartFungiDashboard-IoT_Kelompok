@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import { useApp } from '../contexts/AppContext';
 import HistoryTable from '../components/HistoryTable';
 import { exportCsv } from '../utils/exportCsv';
-import { Download, Search } from 'lucide-react';
+import { Bird, Download, Search } from 'lucide-react';
 
 const STATUS_OPTIONS = ['Semua', 'Kondisi Aman', 'Waspada Lembab', 'Risiko Jamur Tinggi', 'Risiko Sangat Tinggi'];
 const PAGE_SIZE = 20;
@@ -35,6 +35,10 @@ export default function History() {
         <p className="text-sm font-medium neo-muted">
           {filtered.length} data. Histori bersifat lokal selama dashboard aktif.
         </p>
+        <span className="bird-tag mt-3">
+          <Bird size={14} />
+          Jejak Kondisi Kandang
+        </span>
       </div>
 
       {/* Filters */}

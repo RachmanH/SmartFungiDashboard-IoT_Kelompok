@@ -3,6 +3,7 @@ import { Thermometer, Droplets, Droplet, ShieldAlert } from 'lucide-react';
 const CARD_CONFIG = {
   temperature: {
     label: 'Suhu',
+    note: 'Udara kandang',
     unit: '°C',
     icon: Thermometer,
     color: 'text-red-600 dark:text-red-100',
@@ -11,6 +12,7 @@ const CARD_CONFIG = {
   },
   humidity: {
     label: 'Kelembaban',
+    note: 'Area rawan lembab',
     unit: '%',
     icon: Droplets,
     color: 'text-blue-600 dark:text-blue-300',
@@ -19,6 +21,7 @@ const CARD_CONFIG = {
   },
   dewPoint: {
     label: 'Titik Embun',
+    note: 'Risiko kondensasi',
     unit: '°C',
     icon: Droplet,
     color: 'text-cyan-600 dark:text-cyan-300',
@@ -27,6 +30,7 @@ const CARD_CONFIG = {
   },
   riskScore: {
     label: 'Skor Risiko',
+    note: 'Lingkungan murai',
     unit: '/100',
     icon: ShieldAlert,
     color: 'text-orange-600 dark:text-orange-300',
@@ -46,7 +50,10 @@ export default function MonitoringCard({ type, value, loading }) {
   return (
     <div className={`${cfg.cardBg} rounded-xl p-5 border-4 border-black dark:border-violet-200 shadow-neo dark:shadow-[5px_5px_0px_0px_rgba(221,214,254,0.24)] transition-transform hover:-translate-y-1`}>
       <div className="flex items-center justify-between mb-3">
-        <span className="text-xs font-bold uppercase text-gray-500 dark:text-violet-200/70 tracking-wider">{cfg.label}</span>
+        <div>
+          <span className="text-xs font-bold uppercase text-gray-500 dark:text-violet-200/70 tracking-wider">{cfg.label}</span>
+          <p className="mt-0.5 text-[11px] font-bold text-gray-400 dark:text-amber-100/60">{cfg.note}</p>
+        </div>
         <div className={`p-2 rounded-lg border-2 border-black dark:border-violet-200 ${cfg.bg}`}>
           <Icon size={18} className={cfg.color} />
         </div>

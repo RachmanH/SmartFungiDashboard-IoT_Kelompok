@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, History, BarChart3, Settings } from 'lucide-react';
+import { BarChart3, Bird, History, LayoutDashboard, Settings } from 'lucide-react';
 
 const navItems = [
   { to: '/', label: 'Dashboard', icon: LayoutDashboard },
@@ -57,9 +57,11 @@ export default function Sidebar({ desktopOpen, mobileOpen, onCloseMobile }) {
           overflow-hidden
         `}>
           <div className="flex items-center gap-2 overflow-hidden transition-all duration-300">
-            <span className="text-2xl shrink-0">🍄</span>
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl border-2 border-black dark:border-amber-100 bg-amber-200 dark:bg-amber-950 shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(253,230,138,0.22)]">
+              <Bird size={19} className="text-black dark:text-amber-100" />
+            </span>
             <span className={`font-black text-lg text-black dark:text-violet-50 tracking-tight whitespace-nowrap transition-all duration-200 ${labelClass}`}>
-              SmartFungi
+              Murai Monitor
             </span>
           </div>
         </div>
@@ -107,7 +109,7 @@ export default function Sidebar({ desktopOpen, mobileOpen, onCloseMobile }) {
             text-xs font-bold text-gray-500 dark:text-violet-200/70 uppercase tracking-wider text-center
             ${mobileOpen ? 'block md:hidden' : desktopOpen ? 'block' : 'hidden'}
           `}>
-            Smart Fungi v1.0
+            Murai Cage Monitor v1.0
           </div>
         </div>
       </aside>

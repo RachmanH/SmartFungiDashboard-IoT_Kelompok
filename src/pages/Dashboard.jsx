@@ -6,7 +6,7 @@ import SensorChart from '../components/SensorChart';
 import HistoryTable from '../components/HistoryTable';
 import ConnectionBadge from '../components/ConnectionBadge';
 import { formatUptime, formatRelativeTime } from '../utils/format';
-import { AlertCircle } from 'lucide-react';
+import { AlertCircle, Bird } from 'lucide-react';
 
 function DisclaimerBanner() {
   return (
@@ -16,6 +16,11 @@ function DisclaimerBanner() {
           <AlertCircle size={18} className="text-blue-600 dark:text-blue-300" />
         </div>
         <p className="text-sm font-medium text-black dark:text-blue-50">
+          <span className="mb-2 inline-flex items-center gap-1 rounded-full border-2 border-black dark:border-blue-200 bg-white/70 dark:bg-neutral-900 px-2 py-0.5 text-[11px] font-black uppercase tracking-wider">
+            <Bird size={12} />
+            Smart Murai Cage
+          </span>
+          <br />
           <strong>Catatan:</strong> Sistem ini tidak mendeteksi jamur secara langsung dan tidak mendiagnosis kesehatan burung murai.
           Sistem hanya mendeteksi kondisi suhu dan kelembaban udara di lingkungan kandang yang berpotensi mendukung pertumbuhan jamur.
         </p>

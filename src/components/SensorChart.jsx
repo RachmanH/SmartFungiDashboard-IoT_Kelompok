@@ -8,6 +8,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
+import { Bird } from 'lucide-react';
 
 function CustomTooltip({ active, payload, label }) {
   if (!active || !payload?.length) return null;
@@ -35,7 +36,10 @@ export default function SensorChart({ data }) {
       <div className="neo-panel p-6">
         <h3 className="neo-section-title mb-4">Grafik Sensor</h3>
         <div className="h-64 flex items-center justify-center text-gray-400 dark:text-violet-200/60 text-sm font-medium border-2 border-dashed border-gray-300 dark:border-violet-300/40 rounded-lg">
-          Belum ada data untuk ditampilkan.
+          <div className="text-center">
+            <Bird size={28} className="mx-auto mb-2 text-amber-500 dark:text-amber-200" />
+            Belum ada jejak kondisi kandang untuk ditampilkan.
+          </div>
         </div>
       </div>
     );

@@ -7,7 +7,7 @@ import {
 import {
   AlertCircle,
   AlertTriangle,
-  BarChart3,
+  Bird,
   CheckCircle2,
   Droplet,
   Droplets,
@@ -175,14 +175,14 @@ export default function Analytics() {
       <div className="space-y-6">
         <div>
           <h1 className="text-2xl neo-section-title mb-1">Analitik</h1>
-          <p className="text-sm font-medium neo-muted">Statistik dan tren data sensor.</p>
+          <p className="text-sm font-medium neo-muted">Statistik dan tren data sensor kandang murai.</p>
         </div>
         <div className="neo-panel p-8 text-center">
           <div className="p-4 rounded-xl border-3 border-black dark:border-violet-200 bg-cream-100 dark:bg-violet-950 shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(221,214,254,0.24)] inline-block mb-4">
-            <BarChart3 size={32} className="text-gray-400 dark:text-violet-200" />
+            <Bird size={32} className="text-amber-500 dark:text-amber-200" />
           </div>
           <p className="text-gray-500 dark:text-violet-200/75 font-medium">
-            Belum ada data untuk dianalisis. Buka dashboard untuk mulai menerima data.
+            Belum ada jejak kondisi kandang untuk dianalisis. Buka dashboard untuk mulai menerima data.
           </p>
         </div>
       </div>
@@ -197,6 +197,10 @@ export default function Analytics() {
         <p className="text-sm font-medium neo-muted">
           {history.length} pembacaan. Data bersifat lokal selama dashboard aktif.
         </p>
+        <span className="bird-tag mt-3">
+          <Bird size={14} />
+          Pola Mikroklimat Murai
+        </span>
       </div>
 
       {/* Summary cards */}

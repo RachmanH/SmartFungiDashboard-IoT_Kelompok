@@ -1,4 +1,4 @@
-import { Lightbulb } from 'lucide-react';
+import { Bird, Lightbulb } from 'lucide-react';
 
 export default function RecommendationBox({ recommendation, loading }) {
   if (loading) {
@@ -21,7 +21,13 @@ export default function RecommendationBox({ recommendation, loading }) {
         <div className="p-2 rounded-lg border-2 border-black dark:border-yellow-200 bg-white dark:bg-neutral-900 shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(254,240,138,0.22)]">
           <Lightbulb size={20} className="text-yellow-600 dark:text-yellow-300" />
         </div>
-        <h3 className="font-black text-black dark:text-yellow-50 uppercase tracking-tight">Rekomendasi Tindakan</h3>
+        <div>
+          <h3 className="font-black text-black dark:text-yellow-50 uppercase tracking-tight">Rekomendasi Perawatan Kandang</h3>
+          <p className="mt-0.5 flex items-center gap-1 text-xs font-black uppercase tracking-wider text-black/60 dark:text-yellow-100/70">
+            <Bird size={12} />
+            Fokus kandang murai
+          </p>
+        </div>
       </div>
       <ul className="space-y-2">
         {lines.map((line, i) => (
