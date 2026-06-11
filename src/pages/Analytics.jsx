@@ -204,7 +204,7 @@ export default function Analytics() {
       </div>
 
       {/* Summary cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {summaryCards.map(({ label, value, unit, icon: Icon, bg, iconBg, valueColor, note }) => (
           <div key={label} className={`${bg} rounded-xl p-5 border-4 border-black dark:border-violet-200 shadow-neo dark:shadow-[5px_5px_0px_0px_rgba(221,214,254,0.22)] transition-transform hover:-translate-y-1`}>
             <div className="flex items-start justify-between gap-3 mb-5">
@@ -240,7 +240,7 @@ export default function Analytics() {
           </span>
         </div>
 
-        <div className="grid grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           {statusCards.map(({ label, count, icon: Icon, bg, iconBg, text }) => (
             <div key={label} className={`${bg} rounded-xl p-3 sm:p-4 border-3 border-black dark:border-violet-100 shadow-neo-sm dark:shadow-[3px_3px_0px_0px_rgba(221,214,254,0.22)]`}>
               <div className="flex items-center justify-between gap-2 mb-3">
