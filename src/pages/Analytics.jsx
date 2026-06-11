@@ -227,25 +227,39 @@ export default function Analytics() {
       </div>
 
       {/* Status counts */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-        {statusCards.map(({ label, count, icon: Icon, bg, iconBg, text }) => (
-          <div key={label} className={`${bg} rounded-xl p-5 border-4 border-black dark:border-violet-100 shadow-neo-sm dark:shadow-[3px_3px_0px_0px_rgba(221,214,254,0.22)]`}>
-            <div className="flex items-center justify-between gap-3 mb-4">
-              <div className={`rounded-xl border-3 border-black dark:border-violet-100 ${iconBg} p-2.5 shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(221,214,254,0.2)]`}>
-                <Icon size={20} className="text-black dark:text-violet-50" />
-              </div>
-              <span className="rounded-full border-2 border-black dark:border-violet-200 bg-white dark:bg-neutral-950 px-3 py-1 text-xs font-black text-black dark:text-violet-50">
-                {percent(count, history.length)}%
-              </span>
-            </div>
-            <p className={`text-xs sm:text-sm font-black uppercase ${text} tracking-wider`}>{label}</p>
-            <div className="mt-2 flex items-end justify-between gap-3">
-              <p className={`text-3xl sm:text-4xl font-black ${text}`}>{count}</p>
-              <p className={`mb-1 text-xs font-bold ${text} opacity-80`}>dari {history.length} data</p>
-            </div>
+      <section className="neo-panel p-5 sm:p-6 space-y-4">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+          <div>
+            <h3 className="neo-section-title mb-1">Sebaran Status Risiko</h3>
+            <p className="text-xs sm:text-sm font-medium neo-muted">
+              Komposisi kondisi kandang berdasarkan status yang tercatat.
+            </p>
           </div>
-        ))}
-      </div>
+          <span className="w-fit rounded-full border-2 border-black dark:border-violet-200 bg-yellow-300 dark:bg-yellow-400 px-3 py-1 text-xs font-black text-black shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(254,240,138,0.24)]">
+            {history.length} data
+          </span>
+        </div>
+
+        <div className="grid grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
+          {statusCards.map(({ label, count, icon: Icon, bg, iconBg, text }) => (
+            <div key={label} className={`${bg} rounded-xl p-3 sm:p-4 border-3 border-black dark:border-violet-100 shadow-neo-sm dark:shadow-[3px_3px_0px_0px_rgba(221,214,254,0.22)]`}>
+              <div className="flex items-center justify-between gap-2 mb-3">
+                <div className={`rounded-lg border-2 border-black dark:border-violet-100 ${iconBg} p-2 shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(221,214,254,0.2)]`}>
+                  <Icon size={18} className="text-black dark:text-violet-50" />
+                </div>
+                <span className="rounded-full border-2 border-black dark:border-violet-200 bg-white dark:bg-neutral-950 px-2 py-0.5 text-[10px] sm:text-xs font-black text-black dark:text-violet-50">
+                  {percent(count, history.length)}%
+                </span>
+              </div>
+              <p className={`text-[10px] sm:text-xs font-black uppercase ${text} tracking-wider`}>{label}</p>
+              <div className="mt-1 flex items-end justify-between gap-2">
+                <p className={`text-2xl sm:text-3xl font-black ${text}`}>{count}</p>
+                <p className={`mb-1 text-[10px] sm:text-xs font-bold ${text} opacity-80`}>data</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {/* Pie chart */}
       {pieData.length > 0 && (
