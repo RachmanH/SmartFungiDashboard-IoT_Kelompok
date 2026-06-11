@@ -65,10 +65,10 @@ export default function MonitoringCard({ type, value, loading }) {
         </div>
       ) : (
         <div className="flex items-baseline gap-1">
-            <span className="text-3xl font-black text-gray-900 dark:text-violet-50">
+            <span className="text-2xl sm:text-3xl font-black text-gray-900 dark:text-violet-50">
             {formattedValue}
           </span>
-          <span className="text-base font-bold text-gray-400 dark:text-violet-200/60">{cfg.unit}</span>
+          <span className="text-sm sm:text-base font-bold text-gray-400 dark:text-violet-200/60">{cfg.unit}</span>
         </div>
       )}
     </div>

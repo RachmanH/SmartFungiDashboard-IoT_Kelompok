@@ -15,7 +15,7 @@ function DisclaimerBanner() {
         <div className="p-2 rounded-lg border-2 border-black dark:border-blue-200 bg-white dark:bg-neutral-900 shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(191,219,254,0.2)] shrink-0">
           <AlertCircle size={18} className="text-blue-600 dark:text-blue-300" />
         </div>
-        <p className="text-sm font-medium text-black dark:text-blue-50">
+        <p className="text-xs sm:text-sm font-medium text-black dark:text-blue-50">
           <span className="mb-2 inline-flex items-center gap-1 rounded-full border-2 border-black dark:border-blue-200 bg-white/70 dark:bg-neutral-900 px-2 py-0.5 text-[11px] font-black uppercase tracking-wider">
             <Bird size={12} />
             Smart Murai Cage
@@ -40,7 +40,7 @@ export default function Dashboard() {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <ConnectionBadge isConnected={isConnected} isLoading={isLoading} error={error} />
         {current && (
-          <div className="flex flex-wrap gap-4 text-sm font-medium text-gray-600 dark:text-violet-200/75">
+          <div className="flex flex-wrap gap-3 sm:gap-4 text-xs sm:text-sm font-medium text-gray-600 dark:text-violet-200/75">
             <span>Uptime ESP32: <strong className="text-black dark:text-violet-50 font-black">{formatUptime(current.uptime)}</strong></span>
             <span>Update: <strong className="text-black dark:text-violet-50 font-black">{formatRelativeTime(current.timestamp)}</strong></span>
           </div>
@@ -49,7 +49,7 @@ export default function Dashboard() {
 
       {/* Error */}
       {error && (
-        <div className="bg-red-300 dark:bg-red-950 border-4 border-black dark:border-red-200 rounded-xl p-4 text-sm font-bold text-black dark:text-red-50 shadow-neo-sm dark:shadow-[3px_3px_0px_0px_rgba(254,202,202,0.24)]">
+        <div className="bg-red-300 dark:bg-red-950 border-4 border-black dark:border-red-200 rounded-xl p-4 text-xs sm:text-sm font-bold text-black dark:text-red-50 shadow-neo-sm dark:shadow-[3px_3px_0px_0px_rgba(254,202,202,0.24)]">
           {error}
         </div>
       )}

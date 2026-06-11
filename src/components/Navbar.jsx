@@ -20,7 +20,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center gap-8">
-            <Link to="/" className="flex items-center gap-2 font-black text-xl tracking-tight text-black dark:text-violet-50">
+            <Link to="/" className="flex items-center gap-2 font-black text-lg sm:text-xl tracking-tight text-black dark:text-violet-50">
               <span className="grid h-9 w-9 place-items-center rounded-xl border-2 border-black dark:border-amber-100 bg-amber-200 dark:bg-amber-950 shadow-neo-sm">
                 <Bird size={19} />
               </span>
@@ -67,7 +67,7 @@ export default function Navbar() {
               <Link
                 key={to}
                 to={to}
-                className={`flex items-center gap-1.5 px-3 py-2 text-sm font-bold border-2 border-black dark:border-violet-200 rounded-lg whitespace-nowrap transition-transform hover:-translate-y-0.5 ${
+                className={`flex items-center gap-1.5 px-3 py-2 text-xs font-bold border-2 border-black dark:border-violet-200 rounded-lg whitespace-nowrap transition-transform hover:-translate-y-0.5 ${
                   active
                     ? 'bg-black text-yellow-300 dark:bg-violet-300 dark:text-black shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(221,214,254,0.3)]'
                     : 'bg-white dark:bg-neutral-950 text-black dark:text-violet-50'

@@ -13,7 +13,7 @@ import { Bird } from 'lucide-react';
 function CustomTooltip({ active, payload, label }) {
   if (!active || !payload?.length) return null;
   return (
-    <div className="bg-white dark:bg-neutral-950 border-3 border-black dark:border-violet-200 rounded-xl p-3 shadow-neo dark:shadow-[3px_3px_0px_0px_rgba(221,214,254,0.24)] text-sm">
+    <div className="bg-white dark:bg-neutral-950 border-3 border-black dark:border-violet-200 rounded-xl p-3 shadow-neo dark:shadow-[3px_3px_0px_0px_rgba(221,214,254,0.24)] text-xs sm:text-sm">
       <p className="font-bold text-gray-600 dark:text-violet-100 mb-2">{label}</p>
       {payload.map((entry) => (
         <p key={entry.dataKey} style={{ color: entry.color }} className="font-bold">
@@ -35,7 +35,7 @@ export default function SensorChart({ data }) {
     return (
       <div className="neo-panel p-6">
         <h3 className="neo-section-title mb-4">Grafik Sensor</h3>
-        <div className="h-64 flex items-center justify-center text-gray-400 dark:text-violet-200/60 text-sm font-medium border-2 border-dashed border-gray-300 dark:border-violet-300/40 rounded-lg">
+        <div className="h-64 flex items-center justify-center text-gray-400 dark:text-violet-200/60 text-xs sm:text-sm font-medium border-2 border-dashed border-gray-300 dark:border-violet-300/40 rounded-lg">
           <div className="text-center">
             <Bird size={28} className="mx-auto mb-2 text-amber-500 dark:text-amber-200" />
             Belum ada jejak kondisi kandang untuk ditampilkan.

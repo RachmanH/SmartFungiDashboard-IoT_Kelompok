@@ -41,7 +41,7 @@ function percent(count, total) {
 function CustomTooltip({ active, payload, label }) {
   if (!active || !payload?.length) return null;
   return (
-    <div className="bg-white dark:bg-neutral-950 border-3 border-black dark:border-violet-200 rounded-xl p-3 shadow-neo dark:shadow-[3px_3px_0px_0px_rgba(221,214,254,0.24)] text-sm">
+    <div className="bg-white dark:bg-neutral-950 border-3 border-black dark:border-violet-200 rounded-xl p-3 shadow-neo dark:shadow-[3px_3px_0px_0px_rgba(221,214,254,0.24)] text-xs sm:text-sm">
       <p className="font-bold text-gray-600 dark:text-violet-100 mb-2">{label}</p>
       {payload.map((entry) => (
         <p key={entry.dataKey} style={{ color: entry.color }} className="font-bold">
@@ -174,14 +174,14 @@ export default function Analytics() {
     return (
       <div className="space-y-6">
         <div>
-          <h1 className="text-2xl neo-section-title mb-1">Analitik</h1>
-          <p className="text-sm font-medium neo-muted">Statistik dan tren data sensor kandang murai.</p>
+          <h1 className="text-xl sm:text-2xl neo-section-title mb-1">Analitik</h1>
+          <p className="text-xs sm:text-sm font-medium neo-muted">Statistik dan tren data sensor kandang murai.</p>
         </div>
         <div className="neo-panel p-8 text-center">
           <div className="p-4 rounded-xl border-3 border-black dark:border-violet-200 bg-cream-100 dark:bg-violet-950 shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(221,214,254,0.24)] inline-block mb-4">
             <Bird size={32} className="text-amber-500 dark:text-amber-200" />
           </div>
-          <p className="text-gray-500 dark:text-violet-200/75 font-medium">
+            <p className="text-xs sm:text-base text-gray-500 dark:text-violet-200/75 font-medium">
             Belum ada jejak kondisi kandang untuk dianalisis. Buka dashboard untuk mulai menerima data.
           </p>
         </div>
@@ -193,8 +193,8 @@ export default function Analytics() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-2xl neo-section-title mb-1">Analitik</h1>
-        <p className="text-sm font-medium neo-muted">
+        <h1 className="text-xl sm:text-2xl neo-section-title mb-1">Analitik</h1>
+        <p className="text-xs sm:text-sm font-medium neo-muted">
           {history.length} pembacaan. Data bersifat lokal selama dashboard aktif.
         </p>
         <span className="bird-tag mt-3">
@@ -217,7 +217,7 @@ export default function Analytics() {
               </div>
             </div>
             <div className="flex items-end justify-between gap-3">
-              <p className={`text-4xl font-black tracking-tight ${valueColor}`}>{value}</p>
+              <p className={`text-3xl sm:text-4xl font-black tracking-tight ${valueColor}`}>{value}</p>
               <span className="mb-1 rounded-lg border-2 border-black dark:border-violet-200 bg-white dark:bg-neutral-950 px-2.5 py-1 text-xs font-black text-black dark:text-violet-50 shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(221,214,254,0.2)]">
                 {unit}
               </span>
@@ -238,9 +238,9 @@ export default function Analytics() {
                 {percent(count, history.length)}%
               </span>
             </div>
-            <p className={`text-sm font-black uppercase ${text} tracking-wider`}>{label}</p>
+            <p className={`text-xs sm:text-sm font-black uppercase ${text} tracking-wider`}>{label}</p>
             <div className="mt-2 flex items-end justify-between gap-3">
-              <p className={`text-4xl font-black ${text}`}>{count}</p>
+              <p className={`text-3xl sm:text-4xl font-black ${text}`}>{count}</p>
               <p className={`mb-1 text-xs font-bold ${text} opacity-80`}>dari {history.length} data</p>
             </div>
           </div>

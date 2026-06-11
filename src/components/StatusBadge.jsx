@@ -8,7 +8,7 @@ const STATUS_STYLES = {
 export default function StatusBadge({ status }) {
   const style = STATUS_STYLES[status] || 'bg-gray-200 text-black border-2 border-black dark:border-violet-200 dark:bg-neutral-900 dark:text-violet-50';
   return (
-    <span className={`inline-flex items-center px-3 py-1 rounded-lg text-xs font-black uppercase tracking-wider ${style}`}>
+    <span className={`inline-flex items-center px-2 sm:px-3 py-1 rounded-lg text-[10px] sm:text-xs font-black uppercase tracking-wider ${style}`}>
       {status || 'Unknown'}
     </span>
   );

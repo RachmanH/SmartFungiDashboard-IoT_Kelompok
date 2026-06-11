@@ -76,25 +76,18 @@ export default function HeroStatusCard({ status, riskScore, tempDewDiff, loading
             <Icon size={32} className={config.labelText} />
           </div>
           <div>
-            <span className="bird-tag mb-3">
-              <Bird size={14} />
-              Kandang Murai
-            </span>
-            <h2 className="text-2xl font-black mb-1 uppercase tracking-tight">{status}</h2>
-            <p className="text-sm font-bold opacity-75">
+            <h2 className="text-xl sm:text-2xl font-black mb-1 uppercase tracking-tight">{status}</h2>
+            <p className="text-xs sm:text-sm font-bold opacity-75">
               Skor lingkungan kandang: <span className="font-black">{riskScore ?? '-'} / 100</span>
             </p>
             {isCondensation && (
-              <p className="mt-3 text-sm font-bold text-red-800 dark:text-red-200 bg-white/50 dark:bg-black/30 px-3 py-1 rounded-lg border-2 border-red-900 dark:border-red-200">
+              <p className="mt-3 text-xs sm:text-sm font-bold text-red-800 dark:text-red-200 bg-white/50 dark:bg-black/30 px-3 py-1 rounded-lg border-2 border-red-900 dark:border-red-200">
                 ⚠️ Kondensasi Mungkin - Selisih suhu-titik embun &lt; 2°C
               </p>
             )}
           </div>
         </div>
 
-        <span className={`px-4 py-2 rounded-xl text-xl font-black border-3 border-black dark:border-violet-200 ${config.labelBg} ${config.labelText} shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(221,214,254,0.24)]`}>
-          {riskScore ?? '-'}
-        </span>
       </div>
     </div>
   );

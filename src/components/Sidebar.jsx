@@ -60,7 +60,7 @@ export default function Sidebar({ desktopOpen, mobileOpen, onCloseMobile }) {
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl border-2 border-black dark:border-amber-100 bg-amber-200 dark:bg-amber-950 shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(253,230,138,0.22)]">
               <Bird size={19} className="text-black dark:text-amber-100" />
             </span>
-            <span className={`font-black text-lg text-black dark:text-violet-50 tracking-tight whitespace-nowrap transition-all duration-200 ${labelClass}`}>
+            <span className={`font-black text-base md:text-lg text-black dark:text-violet-50 tracking-tight whitespace-nowrap transition-all duration-200 ${labelClass}`}>
               Murai Monitor
             </span>
           </div>
@@ -77,7 +77,7 @@ export default function Sidebar({ desktopOpen, mobileOpen, onCloseMobile }) {
                   to={to}
                   onClick={onCloseMobile}
                   className={`
-                    flex items-center gap-3 py-3 font-bold border-2 border-black dark:border-violet-200 rounded-xl
+                    flex items-center gap-3 py-3 text-sm md:text-base font-bold border-2 border-black dark:border-violet-200 rounded-xl
                     transition-all duration-150 active:scale-95
                     ${expandedClass}
                     ${active

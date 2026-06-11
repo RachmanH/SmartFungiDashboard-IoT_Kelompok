@@ -9,7 +9,7 @@ export default function HistoryTable({ data, maxRows = 10 }) {
     return (
         <div className="neo-panel p-6">
         <h3 className="neo-section-title mb-4">Riwayat Terbaru</h3>
-        <div className="text-center text-gray-400 dark:text-violet-200/60 text-sm font-medium py-8 border-2 border-dashed border-gray-300 dark:border-violet-300/40 rounded-lg">
+        <div className="text-center text-gray-400 dark:text-violet-200/60 text-xs sm:text-sm font-medium py-8 border-2 border-dashed border-gray-300 dark:border-violet-300/40 rounded-lg">
           <Bird size={28} className="mx-auto mb-2 text-amber-500 dark:text-amber-200" />
           Belum ada jejak pembacaan kandang.
         </div>
@@ -21,7 +21,7 @@ export default function HistoryTable({ data, maxRows = 10 }) {
     <div className="neo-panel p-6">
       <h3 className="neo-section-title mb-4">Riwayat Terbaru</h3>
       <div className="overflow-x-auto">
-        <table className="w-full text-sm">
+        <table className="w-full text-xs sm:text-sm">
           <thead>
             <tr className="border-b-2 border-black dark:border-violet-200">
               <th className="text-left py-3 pr-4 font-black text-gray-600 dark:text-violet-200 uppercase tracking-wider text-xs">Waktu</th>

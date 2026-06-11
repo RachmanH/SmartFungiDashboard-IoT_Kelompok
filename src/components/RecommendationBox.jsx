@@ -22,7 +22,7 @@ export default function RecommendationBox({ recommendation, loading }) {
           <Lightbulb size={20} className="text-yellow-600 dark:text-yellow-300" />
         </div>
         <div>
-          <h3 className="font-black text-black dark:text-yellow-50 uppercase tracking-tight">Rekomendasi Perawatan Kandang</h3>
+          <h3 className="text-sm sm:text-base font-black text-black dark:text-yellow-50 uppercase tracking-tight">Rekomendasi Perawatan Kandang</h3>
           <p className="mt-0.5 flex items-center gap-1 text-xs font-black uppercase tracking-wider text-black/60 dark:text-yellow-100/70">
             <Bird size={12} />
             Fokus kandang murai
@@ -31,7 +31,7 @@ export default function RecommendationBox({ recommendation, loading }) {
       </div>
       <ul className="space-y-2">
         {lines.map((line, i) => (
-          <li key={i} className="flex items-start gap-3 text-sm font-medium text-black dark:text-yellow-50">
+          <li key={i} className="flex items-start gap-3 text-xs sm:text-sm font-medium text-black dark:text-yellow-50">
             <span className="mt-0.5 shrink-0 w-6 h-6 flex items-center justify-center bg-black dark:bg-yellow-200 text-yellow-400 dark:text-yellow-900 rounded-full text-xs font-black">✓</span>
             <span>{line}</span>
           </li>
