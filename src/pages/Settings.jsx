@@ -1,9 +1,6 @@
 import { useState } from 'react';
 import { useApp } from '../contexts/AppContext';
-import { AlertTriangle, Bird, Database, Moon, RefreshCw, Save, Sun } from 'lucide-react';
-
-const FIREBASE_DB_URL = import.meta.env.VITE_FIREBASE_DB_URL;
-const FIREBASE_PATH = import.meta.env.VITE_FIREBASE_PATH;
+import { AlertTriangle, Bird, Moon, RefreshCw, Save, Sun } from 'lucide-react';
 
 export default function Settings() {
   const { config, updateConfig, darkMode, toggleDarkMode } = useApp();
@@ -29,30 +26,6 @@ export default function Settings() {
           Profil Kandang Murai
         </span>
       </div>
-
-      {/* Firebase info */}
-      <section className="neo-panel p-6 space-y-5">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="p-2 rounded-lg border-2 border-black dark:border-blue-200 bg-blue-200 dark:bg-blue-950 shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(191,219,254,0.22)]">
-            <Database size={18} className="text-blue-600 dark:text-blue-300" />
-          </div>
-          <h2 className="neo-section-title">Firebase Configuration</h2>
-        </div>
-        <div className="grid gap-4 text-sm lg:grid-cols-2">
-          <div className="space-y-2 rounded-xl border-3 border-black dark:border-violet-200 bg-cream-100 dark:bg-neutral-950 p-4">
-            <span className="font-black neo-muted uppercase text-xs tracking-wider">Database URL</span>
-            <code className="block w-full text-gray-800 dark:text-violet-100 bg-white dark:bg-neutral-900 px-3 py-2 rounded-lg border-2 border-black dark:border-violet-200 font-mono text-xs break-all">
-              {FIREBASE_DB_URL}
-            </code>
-          </div>
-          <div className="space-y-2 rounded-xl border-3 border-black dark:border-violet-200 bg-cream-100 dark:bg-neutral-950 p-4">
-            <span className="font-black neo-muted uppercase text-xs tracking-wider">Path</span>
-            <code className="block w-full text-gray-800 dark:text-violet-100 bg-white dark:bg-neutral-900 px-3 py-2 rounded-lg border-2 border-black dark:border-violet-200 font-mono text-xs break-all">
-              {FIREBASE_PATH}
-            </code>
-          </div>
-        </div>
-      </section>
 
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Refresh interval */}
