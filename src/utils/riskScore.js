@@ -1,6 +1,6 @@
 /**
  * Calculate risk score.
- * Only used if Firebase does not send `risk_score` field.
+ * Only used if Supabase does not send `risk_score` field.
  */
 export function calcRiskScore(temp, humidity) {
   const humScore = Math.max(0, Math.min(100, ((humidity - 60) / 35) * 100));

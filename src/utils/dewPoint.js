@@ -1,6 +1,6 @@
 /**
  * Calculate dew point using Magnus formula.
- * Only used if Firebase does not send `dew_point_c` field.
+ * Only used if Supabase does not send `dew_point_c` field.
  */
 export function calcDewPoint(temp, humidity) {
   const a = 17.27;

@@ -34,7 +34,7 @@ export default function HistoryTable({ data, maxRows = 10 }) {
           </thead>
           <tbody>
             {rows.map((row, i) => (
-              <tr key={i} className="border-b border-gray-200 dark:border-violet-200/20 hover:bg-cream-100 dark:hover:bg-violet-950/70 transition-colors">
+              <tr key={row.id ?? row.timestamp ?? i} className="border-b border-gray-200 dark:border-violet-200/20 hover:bg-cream-100 dark:hover:bg-violet-950/70 transition-colors">
                 <td className="py-3 pr-4 font-medium text-gray-700 dark:text-violet-100/80">{formatTimestamp(row.timestamp)}</td>
                 <td className="text-right py-3 px-3 font-black">{row.temperature?.toFixed(1) ?? '-'} °C</td>
                 <td className="text-right py-3 px-3 font-black">{row.humidity?.toFixed(1) ?? '-'} %</td>

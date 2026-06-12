@@ -182,7 +182,7 @@ export default function Analytics() {
             <Bird size={32} className="text-amber-500 dark:text-amber-200" />
           </div>
             <p className="text-xs sm:text-base text-gray-500 dark:text-violet-200/75 font-medium">
-            Belum ada jejak kondisi kandang untuk dianalisis. Buka dashboard untuk mulai menerima data.
+            Belum ada jejak kondisi kandang untuk dianalisis. Pastikan ESP32 sudah mengirim log ke Supabase.
           </p>
         </div>
       </div>
@@ -195,7 +195,7 @@ export default function Analytics() {
       <div>
         <h1 className="text-xl sm:text-2xl neo-section-title mb-1">Analitik</h1>
         <p className="text-xs sm:text-sm font-medium neo-muted">
-          {history.length} pembacaan. Data bersifat lokal selama dashboard aktif.
+          {history.length} pembacaan dari riwayat Supabase perangkat.
         </p>
         <span className="bird-tag mt-3">
           <Bird size={14} />

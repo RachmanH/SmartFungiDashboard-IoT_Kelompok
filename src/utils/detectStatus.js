@@ -1,6 +1,6 @@
 /**
  * Fallback status detection.
- * Only used if Firebase does not send `status` field.
+ * Only used if Supabase does not send `status` field.
  */
 export function detectStatus(temp, humidity) {
   if (humidity <= 70) return 'Kondisi Aman';

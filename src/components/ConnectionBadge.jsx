@@ -5,7 +5,7 @@ export default function ConnectionBadge({ isConnected, isLoading, error }) {
     return (
       <div className="inline-flex items-center gap-2 rounded-xl border-2 border-black dark:border-violet-200 bg-white dark:bg-neutral-900 px-3 py-2 text-xs sm:text-sm font-black text-gray-600 dark:text-violet-100 shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(221,214,254,0.22)]">
         <Loader2 size={14} className="animate-spin" />
-        <span>Menghubungi Firebase...</span>
+        <span>Menghubungi Supabase...</span>
       </div>
     );
   }

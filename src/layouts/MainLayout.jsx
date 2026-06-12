@@ -3,7 +3,7 @@ import MuraiBird from '../components/MuraiBird';
 import { Bird, Menu, Moon, Sun, PanelLeftClose } from 'lucide-react';
 import { useApp } from '../contexts/AppContext';
 import { useDarkMode } from '../hooks/useDarkMode';
-import { useFirebaseSensorData } from '../hooks/useFirebaseSensorData';
+import { useSupabaseSensorData } from '../hooks/useSupabaseSensorData';
 
 export default function MainLayout({ children }) {
   const {
@@ -15,7 +15,7 @@ export default function MainLayout({ children }) {
     toggleDarkMode,
   } = useApp();
   useDarkMode();
-  useFirebaseSensorData();
+  useSupabaseSensorData();
 
   return (
     <div className="min-h-screen bg-cream-100 dark:bg-neutral-950 bird-shell flex text-gray-900 dark:text-violet-50">

@@ -104,7 +104,7 @@ export default function Settings() {
           </li>
           <li className="flex items-start gap-2">
             <span className="w-2 h-2 mt-2 rounded-full bg-black dark:bg-white shrink-0" />
-            Dashboard hanya membaca data dari Firebase.
+            Dashboard hanya membaca data dari Supabase.
           </li>
           <li className="flex items-start gap-2">
             <span className="w-2 h-2 mt-2 rounded-full bg-black dark:bg-white shrink-0" />
@@ -116,7 +116,7 @@ export default function Settings() {
           </li>
           <li className="flex items-start gap-2">
             <span className="w-2 h-2 mt-2 rounded-full bg-black dark:bg-white shrink-0" />
-             Riwayat permanen hanya tersedia jika ESP32 menyimpan data ke <code className="bg-cream-200 dark:bg-neutral-950 px-1.5 py-0.5 rounded border border-black dark:border-violet-200 font-mono text-xs">/logs</code>.
+             Riwayat permanen dibaca dari tabel smart_fungi_logs jika ESP32 sudah menyimpan data historis ke Supabase.
           </li>
         </ul>
         <div className="mt-4 p-4 bg-blue-200 dark:bg-blue-950 border-4 border-black dark:border-blue-200 rounded-xl text-xs sm:text-sm font-medium text-black dark:text-blue-50 shadow-neo-sm dark:shadow-[3px_3px_0px_0px_rgba(191,219,254,0.22)]">

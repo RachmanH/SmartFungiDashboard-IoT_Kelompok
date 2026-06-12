@@ -33,7 +33,7 @@ export default function History() {
       <div>
         <h1 className="text-xl sm:text-2xl neo-section-title mb-1">Riwayat Pembacaan</h1>
         <p className="text-xs sm:text-sm font-medium neo-muted">
-          {filtered.length} data. Histori bersifat lokal selama dashboard aktif.
+          {filtered.length} data dari riwayat Supabase perangkat.
         </p>
         <span className="bird-tag mt-3">
           <Bird size={14} />

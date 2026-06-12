@@ -1,6 +1,6 @@
 /**
  * Fallback recommendations based on status.
- * Only used if Firebase does not send `recommendation` field.
+ * Only used if Supabase does not send `recommendation` field.
  */
 export function getRecommendation(status) {
   switch (status) {
