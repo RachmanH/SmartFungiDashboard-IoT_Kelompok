@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useApp } from '../contexts/AppContext';
+import { useWindowWidth } from '../hooks/useWindowWidth';
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
   PieChart, Pie, Cell, Tooltip as PieTooltip,
@@ -57,6 +58,8 @@ function CustomTooltip({ active, payload, label }) {
 
 export default function Analytics() {
   const { history } = useApp();
+  const width = useWindowWidth();
+  const isMobile = width < 640;
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [sortOrder, setSortOrder] = useState('desc');
@@ -326,35 +329,46 @@ export default function Analytics() {
 
       {/* Pie chart */}
       {pieData.length > 0 && (
-        <div className="neo-panel p-6">
+        <div className={`neo-panel ${isMobile ? 'p-3' : 'p-6'}`}>
           <h3 className="neo-section-title mb-4">Distribusi Status</h3>
-          <ResponsiveContainer width="100%" height={240}>
+          <ResponsiveContainer width="100%" height={isMobile ? 220 : 240}>
             <PieChart>
               <PieTooltip content={<CustomTooltip />} />
-              <Pie data={pieData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={90} label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}>
+              <Pie
+                data={pieData}
+                dataKey="value"
+                nameKey="name"
+                cx="50%"
+                cy="50%"
+                outerRadius={isMobile ? 65 : 90}
+                label={isMobile
+                  ? ({ percent }) => `${(percent * 100).toFixed(0)}%`
+                  : ({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`
+                }
+              >
                 {pieData.map((entry) => (
                   <Cell key={entry.name} fill={entry.color} stroke="var(--chart-axis)" strokeWidth={2} />
                 ))}
               </Pie>
-              <Legend wrapperStyle={{ fontSize: 12, fontWeight: 'bold', color: 'var(--chart-axis)' }} />
+              <Legend wrapperStyle={{ fontSize: isMobile ? 10 : 12, fontWeight: 'bold', color: 'var(--chart-axis)' }} />
             </PieChart>
           </ResponsiveContainer>
         </div>
       )}
 
       {/* Trend charts */}
-      <div className="neo-panel p-6">
+      <div className={`neo-panel ${isMobile ? 'p-3' : 'p-6'}`}>
         <h3 className="neo-section-title mb-4">Tren Data</h3>
-        <ResponsiveContainer width="100%" height={260}>
-          <LineChart data={trendData} margin={{ top: 5, right: 10, left: -20, bottom: 5 }}>
+        <ResponsiveContainer width="100%" height={isMobile ? 220 : 260}>
+          <LineChart data={trendData} margin={{ top: 5, right: isMobile ? 5 : 10, left: isMobile ? -10 : -20, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" />
-            <XAxis dataKey="time" tick={{ fontSize: 11, fontWeight: 'bold', fill: 'var(--chart-axis)' }} tickLine={false} axisLine={{ stroke: 'var(--chart-axis)', strokeWidth: 2 }} />
-            <YAxis tick={{ fontSize: 11, fontWeight: 'bold', fill: 'var(--chart-axis)' }} tickLine={false} axisLine={{ stroke: 'var(--chart-axis)', strokeWidth: 2 }} />
+            <XAxis dataKey="time" tick={{ fontSize: isMobile ? 9 : 11, fontWeight: 'bold', fill: 'var(--chart-axis)' }} tickLine={false} axisLine={{ stroke: 'var(--chart-axis)', strokeWidth: 2 }} interval={isMobile ? 'preserveStartEnd' : 'equidistantPreserveStart'} />
+            <YAxis tick={{ fontSize: isMobile ? 9 : 11, fontWeight: 'bold', fill: 'var(--chart-axis)' }} tickLine={false} axisLine={{ stroke: 'var(--chart-axis)', strokeWidth: 2 }} />
             <Tooltip content={<CustomTooltip />} />
-            <Legend wrapperStyle={{ fontSize: 12, fontWeight: 'bold', color: 'var(--chart-axis)' }} />
-            <Line type="monotone" dataKey="Suhu" stroke="#ef4444" strokeWidth={3} dot={{ fill: 'var(--chart-dot)', strokeWidth: 2, r: 4 }} name="Suhu (°C)" unit="°C" />
-            <Line type="monotone" dataKey="Kelembaban" stroke="#3b82f6" strokeWidth={3} dot={{ fill: 'var(--chart-dot)', strokeWidth: 2, r: 4 }} name="Kelembaban (%)" unit="%" />
-            <Line type="monotone" dataKey="Skor Risiko" stroke="#f97316" strokeWidth={3} dot={{ fill: 'var(--chart-dot)', strokeWidth: 2, r: 4 }} name="Skor Risiko" />
+            <Legend wrapperStyle={{ fontSize: isMobile ? 10 : 12, fontWeight: 'bold', color: 'var(--chart-axis)' }} />
+            <Line type="monotone" dataKey="Suhu" stroke="#ef4444" strokeWidth={isMobile ? 2 : 3} dot={isMobile ? false : { fill: 'var(--chart-dot)', strokeWidth: 2, r: 4 }} name="Suhu (°C)" unit="°C" />
+            <Line type="monotone" dataKey="Kelembaban" stroke="#3b82f6" strokeWidth={isMobile ? 2 : 3} dot={isMobile ? false : { fill: 'var(--chart-dot)', strokeWidth: 2, r: 4 }} name="Kelembaban (%)" unit="%" />
+            <Line type="monotone" dataKey="Skor Risiko" stroke="#f97316" strokeWidth={isMobile ? 2 : 3} dot={isMobile ? false : { fill: 'var(--chart-dot)', strokeWidth: 2, r: 4 }} name="Skor Risiko" />
           </LineChart>
         </ResponsiveContainer>
       </div>

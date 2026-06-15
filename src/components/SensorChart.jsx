@@ -9,6 +9,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { Bird } from 'lucide-react';
+import { useWindowWidth } from '../hooks/useWindowWidth';
 
 function CustomTooltip({ active, payload, label }) {
   if (!active || !payload?.length) return null;
@@ -25,6 +26,9 @@ function CustomTooltip({ active, payload, label }) {
 }
 
 export default function SensorChart({ data }) {
+  const width = useWindowWidth();
+  const isMobile = width < 640;
+
   const chartData = [...data].reverse().map((d) => ({
     time: d.timestamp ? new Date(d.timestamp).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) : '-',
     Suhu: d.temperature,
@@ -46,26 +50,27 @@ export default function SensorChart({ data }) {
   }
 
   return (
-    <div className="neo-panel p-6">
+    <div className={`neo-panel ${isMobile ? 'p-3' : 'p-6'}`}>
       <h3 className="neo-section-title mb-4">Grafik Sensor</h3>
-      <ResponsiveContainer width="100%" height={260}>
-        <LineChart data={chartData} margin={{ top: 5, right: 10, left: -20, bottom: 5 }}>
+      <ResponsiveContainer width="100%" height={isMobile ? 220 : 260}>
+        <LineChart data={chartData} margin={{ top: 5, right: isMobile ? 5 : 10, left: isMobile ? -10 : -20, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" />
           <XAxis
             dataKey="time"
-            tick={{ fontSize: 11, fontWeight: 'bold', fill: 'var(--chart-axis)' }}
+            tick={{ fontSize: isMobile ? 9 : 11, fontWeight: 'bold', fill: 'var(--chart-axis)' }}
             tickLine={false}
             axisLine={{ stroke: 'var(--chart-axis)', strokeWidth: 2 }}
+            interval={isMobile ? 'preserveStartEnd' : 'equidistantPreserveStart'}
           />
-          <YAxis tick={{ fontSize: 11, fontWeight: 'bold', fill: 'var(--chart-axis)' }} tickLine={false} axisLine={{ stroke: 'var(--chart-axis)', strokeWidth: 2 }} />
+          <YAxis tick={{ fontSize: isMobile ? 9 : 11, fontWeight: 'bold', fill: 'var(--chart-axis)' }} tickLine={false} axisLine={{ stroke: 'var(--chart-axis)', strokeWidth: 2 }} />
           <Tooltip content={<CustomTooltip />} />
-          <Legend wrapperStyle={{ fontSize: 12, fontWeight: 'bold' }} />
+          <Legend wrapperStyle={{ fontSize: isMobile ? 10 : 12, fontWeight: 'bold' }} />
           <Line
             type="monotone"
             dataKey="Suhu"
             stroke="#ef4444"
-            strokeWidth={3}
-            dot={{ fill: 'var(--chart-dot)', strokeWidth: 2, r: 4 }}
+            strokeWidth={isMobile ? 2 : 3}
+            dot={isMobile ? false : { fill: 'var(--chart-dot)', strokeWidth: 2, r: 4 }}
             name="Suhu (°C)"
             unit="°C"
           />
@@ -73,8 +78,8 @@ export default function SensorChart({ data }) {
             type="monotone"
             dataKey="Kelembaban"
             stroke="#3b82f6"
-            strokeWidth={3}
-            dot={{ fill: 'var(--chart-dot)', strokeWidth: 2, r: 4 }}
+            strokeWidth={isMobile ? 2 : 3}
+            dot={isMobile ? false : { fill: 'var(--chart-dot)', strokeWidth: 2, r: 4 }}
             name="Kelembaban (%)"
             unit="%"
           />

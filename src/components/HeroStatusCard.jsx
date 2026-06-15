@@ -48,10 +48,9 @@ function getStatusConfig(status) {
   return STATUS_CONFIG[status] || STATUS_CONFIG['Kondisi Aman'];
 }
 
-export default function HeroStatusCard({ status, riskScore, tempDewDiff, loading }) {
+export default function HeroStatusCard({ status, riskScore, loading }) {
   const config = getStatusConfig(status);
   const Icon = config.icon;
-  const isCondensation = tempDewDiff != null && tempDewDiff < 2;
 
   if (loading || !status) {
     return (
@@ -80,11 +79,6 @@ export default function HeroStatusCard({ status, riskScore, tempDewDiff, loading
             <p className="text-xs sm:text-sm font-bold opacity-75">
               Skor lingkungan kandang: <span className="font-black">{riskScore ?? '-'} / 100</span>
             </p>
-            {isCondensation && (
-              <p className="mt-3 text-xs sm:text-sm font-bold text-red-800 dark:text-red-200 bg-white/50 dark:bg-black/30 px-3 py-1 rounded-lg border-2 border-red-900 dark:border-red-200">
-                ⚠️ Kondensasi Mungkin - Selisih suhu-titik embun &lt; 2°C
-              </p>
-            )}
           </div>
         </div>
 

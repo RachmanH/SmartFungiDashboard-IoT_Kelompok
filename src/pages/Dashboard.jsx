@@ -6,7 +6,7 @@ import SensorChart from '../components/SensorChart';
 import HistoryTable from '../components/HistoryTable';
 import ConnectionBadge from '../components/ConnectionBadge';
 import { formatUptime, formatRelativeTime } from '../utils/format';
-import { AlertCircle, Bird } from 'lucide-react';
+import { AlertCircle, Bird, Clock, RefreshCw } from 'lucide-react';
 
 function DisclaimerBanner() {
   return (
@@ -40,9 +40,17 @@ export default function Dashboard() {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <ConnectionBadge isConnected={isConnected} isLoading={isLoading} error={error} />
         {current && (
-          <div className="flex flex-wrap gap-3 sm:gap-4 text-xs sm:text-sm font-medium text-gray-600 dark:text-violet-200/75">
-            <span>Uptime ESP32: <strong className="text-black dark:text-violet-50 font-black">{formatUptime(current.uptime)}</strong></span>
-            <span>Update: <strong className="text-black dark:text-violet-50 font-black">{formatRelativeTime(current.timestamp)}</strong></span>
+          <div className="flex flex-wrap gap-2 sm:gap-3">
+            <div className="inline-flex items-center gap-2 rounded-xl border-2 border-black dark:border-violet-200 bg-white dark:bg-neutral-900 px-3 py-2 text-xs sm:text-sm font-bold text-gray-600 dark:text-violet-200/75 shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(221,214,254,0.22)]">
+              <Clock size={14} className="text-emerald-600 dark:text-emerald-400 shrink-0" />
+              <span>Uptime:</span>
+              <strong className="text-black dark:text-violet-50 font-black">{formatUptime(current.uptime)}</strong>
+            </div>
+            <div className="inline-flex items-center gap-2 rounded-xl border-2 border-black dark:border-violet-200 bg-white dark:bg-neutral-900 px-3 py-2 text-xs sm:text-sm font-bold text-gray-600 dark:text-violet-200/75 shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(221,214,254,0.22)]">
+              <RefreshCw size={14} className="text-blue-600 dark:text-blue-400 shrink-0" />
+              <span>Update:</span>
+              <strong className="text-black dark:text-violet-50 font-black">{formatRelativeTime(current.timestamp)}</strong>
+            </div>
           </div>
         )}
       </div>
@@ -58,7 +66,6 @@ export default function Dashboard() {
       <HeroStatusCard
         status={current?.status}
         riskScore={current?.riskScore}
-        tempDewDiff={current?.tempDewDiff}
         loading={isLoading}
       />
 
