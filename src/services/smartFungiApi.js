@@ -44,6 +44,26 @@ async function request(url) {
   return response.json();
 }
 
+async function fetchAllPages(table, params = {}, batchSize = 1000) {
+  const allRows = [];
+  let offset = 0;
+
+  while (true) {
+    const pageParams = { ...params, limit: batchSize, offset };
+    const url = buildUrl(table, pageParams);
+    const rows = await request(url);
+
+    if (!Array.isArray(rows) || rows.length === 0) break;
+
+    allRows.push(...rows);
+
+    if (rows.length < batchSize) break;
+    offset += batchSize;
+  }
+
+  return allRows;
+}
+
 export async function getLatestSensorData() {
   const url = buildUrl('smart_fungi_latest', {
     device_id: `eq.${DEVICE_ID}`,
@@ -55,38 +75,28 @@ export async function getLatestSensorData() {
   return data[0] || null;
 }
 
-export async function getSensorLogs(limit = 50) {
-  const safeLimit = Math.max(1, Math.min(500, Number(limit) || 50));
-  const url = buildUrl('smart_fungi_logs', {
+export async function getSensorLogs() {
+  return fetchAllPages('smart_fungi_logs', {
     device_id: `eq.${DEVICE_ID}`,
     select: '*',
     order: 'created_at.desc',
-    limit: safeLimit,
   });
-
-  return request(url);
 }
 
-export async function getHighRiskLogs(limit = 100) {
-  const safeLimit = Math.max(1, Math.min(500, Number(limit) || 100));
-  const url = buildUrl('smart_fungi_logs', {
+export async function getHighRiskLogs() {
+  return fetchAllPages('smart_fungi_logs', {
     device_id: `eq.${DEVICE_ID}`,
     risk_score: 'gte.70',
     select: '*',
     order: 'created_at.desc',
-    limit: safeLimit,
   });
-
-  return request(url);
 }
 
 export async function getLogsByDateRange(startISO, endISO) {
-  const url = buildUrl('smart_fungi_logs', {
+  return fetchAllPages('smart_fungi_logs', {
     device_id: `eq.${DEVICE_ID}`,
     created_at: [`gte.${startISO}`, `lt.${endISO}`],
     select: '*',
     order: 'created_at.asc',
   });
-
-  return request(url);
 }

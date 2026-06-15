@@ -2,14 +2,11 @@ import { createContext, useContext, useState, useCallback } from 'react';
 
 const AppContext = createContext(null);
 
-const MAX_HISTORY = 100;
-const HISTORY_STORAGE_KEY = 'sf-history';
 const CONFIG_STORAGE_KEY = 'sf-config';
 const DARK_MODE_STORAGE_KEY = 'sf-dark-mode';
 const SIDEBAR_STORAGE_KEY = 'sf-desktop-sidebar-open';
 const DEFAULT_CONFIG = {
   refreshInterval: 10000,
-  maxHistory: MAX_HISTORY,
 };
 
 function readStorage(key, fallback) {
@@ -29,11 +26,6 @@ function writeStorage(key, value) {
   }
 }
 
-function getInitialHistory() {
-  const saved = readStorage(HISTORY_STORAGE_KEY, []);
-  return Array.isArray(saved) ? saved.slice(0, MAX_HISTORY) : [];
-}
-
 function getInitialConfig() {
   const saved = readStorage(CONFIG_STORAGE_KEY, {});
   const refreshInterval = Number(saved?.refreshInterval);
@@ -44,7 +36,6 @@ function getInitialConfig() {
     refreshInterval: Number.isFinite(refreshInterval)
       ? Math.max(5000, Math.min(60000, refreshInterval))
       : DEFAULT_CONFIG.refreshInterval,
-    maxHistory: MAX_HISTORY,
   };
 }
 
@@ -65,7 +56,7 @@ function isSameReading(a, b) {
 
 export function AppProvider({ children }) {
   const [current, setCurrent] = useState(null);
-  const [history, setHistoryState] = useState(getInitialHistory);
+  const [history, setHistoryState] = useState([]);
   const [transitions, setTransitions] = useState([]);
   const [isConnected, setIsConnected] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -78,9 +69,7 @@ export function AppProvider({ children }) {
   const setHistory = useCallback((updater) => {
     setHistoryState((prev) => {
       const nextValue = typeof updater === 'function' ? updater(prev) : updater;
-      const next = Array.isArray(nextValue) ? nextValue.slice(0, MAX_HISTORY) : [];
-      writeStorage(HISTORY_STORAGE_KEY, next);
-      return next;
+      return Array.isArray(nextValue) ? nextValue : [];
     });
   }, []);
 
@@ -121,7 +110,6 @@ export function AppProvider({ children }) {
         refreshInterval: Number.isFinite(refreshInterval)
           ? Math.max(5000, Math.min(60000, refreshInterval))
           : DEFAULT_CONFIG.refreshInterval,
-        maxHistory: MAX_HISTORY,
       };
 
       writeStorage(CONFIG_STORAGE_KEY, normalized);
@@ -133,9 +121,7 @@ export function AppProvider({ children }) {
     (reading) => {
       setHistory((prev) => {
         if (isSameReading(prev[0], reading)) return prev;
-
-        const next = [reading, ...prev];
-        return next.slice(0, MAX_HISTORY);
+        return [reading, ...prev];
       });
     },
     [setHistory]

@@ -75,7 +75,7 @@ export function useSupabaseSensorData() {
     try {
       const [latestRaw, logsRaw] = await Promise.all([
         getLatestSensorData(),
-        getSensorLogs(config.maxHistory),
+        getSensorLogs(),
       ]);
       const normalizedLogs = normalizeRows(logsRaw);
       const normalizedLatest = latestRaw ? normalizeData(latestRaw) : null;
@@ -110,7 +110,7 @@ export function useSupabaseSensorData() {
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [config.refreshInterval, config.maxHistory]);
+  }, [config.refreshInterval]);
 
   return { refetch: fetchData };
 }
