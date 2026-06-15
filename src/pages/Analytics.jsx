@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useApp } from '../contexts/AppContext';
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
@@ -7,7 +7,10 @@ import {
 import {
   AlertCircle,
   AlertTriangle,
+  ArrowDownAZ,
+  ArrowUpAZ,
   Bird,
+  CalendarDays,
   CheckCircle2,
   Droplet,
   Droplets,
@@ -54,20 +57,44 @@ function CustomTooltip({ active, payload, label }) {
 
 export default function Analytics() {
   const { history } = useApp();
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [sortOrder, setSortOrder] = useState('desc');
+
+  const filteredData = useMemo(() => {
+    const start = startDate ? new Date(startDate + 'T00:00:00') : null;
+    const end = endDate ? new Date(endDate + 'T23:59:59') : null;
+
+    const result = history.filter((d) => {
+      if (!start && !end) return true;
+      const ts = new Date(d.timestamp);
+      if (start && ts < start) return false;
+      if (end && ts > end) return false;
+      return true;
+    });
+
+    result.sort((a, b) => {
+      const ta = new Date(a.timestamp).getTime();
+      const tb = new Date(b.timestamp).getTime();
+      return sortOrder === 'desc' ? tb - ta : ta - tb;
+    });
+
+    return result;
+  }, [history, startDate, endDate, sortOrder]);
 
   const stats = useMemo(() => {
-    if (!history.length) return null;
+    if (!filteredData.length) return null;
     return {
-      avgTemp:      avg(history.map((d) => d.temperature)),
-      avgHumidity: avg(history.map((d) => d.humidity)),
-      avgDewPoint:  avg(history.map((d) => d.dewPoint)),
-      avgRiskScore: avg(history.map((d) => d.riskScore)),
-      countAman:        countStatus(history, 'Kondisi Aman'),
-      countWaspada:      countStatus(history, 'Waspada Lembab'),
-      countTinggi:       countStatus(history, 'Risiko Jamur Tinggi'),
-      countSangatTinggi: countStatus(history, 'Risiko Sangat Tinggi'),
+      avgTemp:      avg(filteredData.map((d) => d.temperature)),
+      avgHumidity: avg(filteredData.map((d) => d.humidity)),
+      avgDewPoint:  avg(filteredData.map((d) => d.dewPoint)),
+      avgRiskScore: avg(filteredData.map((d) => d.riskScore)),
+      countAman:        countStatus(filteredData, 'Kondisi Aman'),
+      countWaspada:      countStatus(filteredData, 'Waspada Lembab'),
+      countTinggi:       countStatus(filteredData, 'Risiko Jamur Tinggi'),
+      countSangatTinggi: countStatus(filteredData, 'Risiko Sangat Tinggi'),
     };
-  }, [history]);
+  }, [filteredData]);
 
   const pieData = useMemo(() => {
     if (!stats) return [];
@@ -80,13 +107,14 @@ export default function Analytics() {
   }, [stats]);
 
   const trendData = useMemo(() => {
-    return [...history].reverse().map((d) => ({
+    const sorted = sortOrder === 'desc' ? [...filteredData].reverse() : [...filteredData];
+    return sorted.map((d) => ({
       time: d.timestamp ? new Date(d.timestamp).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) : '-',
       Suhu: d.temperature,
       Kelembaban: d.humidity,
       'Skor Risiko': d.riskScore,
     }));
-  }, [history]);
+  }, [filteredData, sortOrder]);
 
   const summaryCards = stats
     ? [
@@ -195,12 +223,47 @@ export default function Analytics() {
       <div>
         <h1 className="text-xl sm:text-2xl neo-section-title mb-1">Analitik</h1>
         <p className="text-xs sm:text-sm font-medium neo-muted">
-          {history.length} pembacaan dari riwayat Supabase perangkat.
+          {filteredData.length} pembacaan dari riwayat Supabase perangkat.
         </p>
         <span className="bird-tag mt-3">
           <Bird size={14} />
           Pola Mikroklimat Murai
         </span>
+      </div>
+
+      {/* Date range + sort */}
+      <div className="flex flex-wrap items-end gap-3">
+        <div className="flex items-center gap-2 rounded-xl border-3 border-black dark:border-violet-200 bg-white dark:bg-neutral-900 px-3 py-3 shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(221,214,254,0.22)]">
+          <CalendarDays size={16} className="text-gray-500 dark:text-violet-200/70 shrink-0" />
+          <input
+            type="date"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+            className="bg-transparent text-xs sm:text-sm font-bold text-gray-900 dark:text-violet-50 focus:outline-none"
+          />
+          <span className="text-xs font-black text-gray-400 dark:text-violet-200/50">—</span>
+          <input
+            type="date"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+            className="bg-transparent text-xs sm:text-sm font-bold text-gray-900 dark:text-violet-50 focus:outline-none"
+          />
+          {(startDate || endDate) && (
+            <button
+              onClick={() => { setStartDate(''); setEndDate(''); }}
+              className="ml-1 text-[10px] font-black text-red-500 dark:text-red-300 hover:underline"
+            >
+              Reset
+            </button>
+          )}
+        </div>
+        {/* <button
+          onClick={() => setSortOrder((s) => s === 'desc' ? 'asc' : 'desc')}
+          className="flex items-center gap-2 px-4 py-3 bg-white hover:bg-cream-100 dark:bg-neutral-900 dark:hover:bg-violet-950 text-black dark:text-violet-50 font-bold border-3 border-black dark:border-violet-200 rounded-xl text-xs sm:text-sm transition-all active:scale-95 shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(221,214,254,0.22)]"
+        >
+          {sortOrder === 'desc' ? <ArrowDownAZ size={16} /> : <ArrowUpAZ size={16} />}
+          {sortOrder === 'desc' ? 'Terbaru' : 'Terlama'}
+        </button> */}
       </div>
 
       {/* Summary cards */}
@@ -236,7 +299,7 @@ export default function Analytics() {
             </p>
           </div>
           <span className="w-fit rounded-full border-2 border-black dark:border-violet-200 bg-yellow-300 dark:bg-yellow-400 px-3 py-1 text-xs font-black text-black shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(254,240,138,0.24)]">
-            {history.length} data
+            {filteredData.length} data
           </span>
         </div>
 
@@ -248,7 +311,7 @@ export default function Analytics() {
                   <Icon size={18} className="text-black dark:text-violet-50" />
                 </div>
                 <span className="rounded-full border-2 border-black dark:border-violet-200 bg-white dark:bg-neutral-950 px-2 py-0.5 text-[10px] sm:text-xs font-black text-black dark:text-violet-50">
-                  {percent(count, history.length)}%
+                  {percent(count, filteredData.length)}%
                 </span>
               </div>
               <p className={`text-[10px] sm:text-xs font-black uppercase ${text} tracking-wider`}>{label}</p>

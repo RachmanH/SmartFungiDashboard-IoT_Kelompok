@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import { useApp } from '../contexts/AppContext';
 import HistoryTable from '../components/HistoryTable';
 import { exportCsv } from '../utils/exportCsv';
-import { Bird, Download, Search } from 'lucide-react';
+import { ArrowDownAZ, ArrowUpAZ, Bird, CalendarDays, Download, Search } from 'lucide-react';
 
 const STATUS_OPTIONS = ['Semua', 'Kondisi Aman', 'Waspada Lembab', 'Risiko Jamur Tinggi', 'Risiko Sangat Tinggi'];
 const PAGE_SIZE = 20;
@@ -11,18 +11,40 @@ export default function History() {
   const { history } = useApp();
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('Semua');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [sortOrder, setSortOrder] = useState('desc');
   const [page, setPage] = useState(1);
 
   const filtered = useMemo(() => {
-    return history.filter((d) => {
+    const start = startDate ? new Date(startDate + 'T00:00:00') : null;
+    const end = endDate ? new Date(endDate + 'T23:59:59') : null;
+
+    const result = history.filter((d) => {
       const matchSearch =
         !search ||
         d.status?.toLowerCase().includes(search.toLowerCase()) ||
         d.recommendation?.toLowerCase().includes(search.toLowerCase());
       const matchStatus = statusFilter === 'Semua' || d.status === statusFilter;
-      return matchSearch && matchStatus;
+
+      let matchDate = true;
+      if (start || end) {
+        const ts = new Date(d.timestamp);
+        if (start && ts < start) matchDate = false;
+        if (end && ts > end) matchDate = false;
+      }
+
+      return matchSearch && matchStatus && matchDate;
     });
-  }, [history, search, statusFilter]);
+
+    result.sort((a, b) => {
+      const ta = new Date(a.timestamp).getTime();
+      const tb = new Date(b.timestamp).getTime();
+      return sortOrder === 'desc' ? tb - ta : ta - tb;
+    });
+
+    return result;
+  }, [history, search, statusFilter, startDate, endDate, sortOrder]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const paginated = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
@@ -67,6 +89,41 @@ export default function History() {
         >
           <Download size={16} />
           Export CSV
+        </button>
+      </div>
+
+      {/* Date range + sort */}
+      <div className="flex flex-wrap items-end gap-3">
+        <div className="flex items-center gap-2 rounded-xl border-3 border-black dark:border-violet-200 bg-white dark:bg-neutral-900 px-3 py-3 shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(221,214,254,0.22)]">
+          <CalendarDays size={16} className="text-gray-500 dark:text-violet-200/70 shrink-0" />
+          <input
+            type="date"
+            value={startDate}
+            onChange={(e) => { setStartDate(e.target.value); setPage(1); }}
+            className="bg-transparent text-xs sm:text-sm font-bold text-gray-900 dark:text-violet-50 focus:outline-none"
+          />
+          <span className="text-xs font-black text-gray-400 dark:text-violet-200/50">—</span>
+          <input
+            type="date"
+            value={endDate}
+            onChange={(e) => { setEndDate(e.target.value); setPage(1); }}
+            className="bg-transparent text-xs sm:text-sm font-bold text-gray-900 dark:text-violet-50 focus:outline-none"
+          />
+          {(startDate || endDate) && (
+            <button
+              onClick={() => { setStartDate(''); setEndDate(''); setPage(1); }}
+              className="ml-1 text-[10px] font-black text-red-500 dark:text-red-300 hover:underline"
+            >
+              Reset
+            </button>
+          )}
+        </div>
+        <button
+          onClick={() => setSortOrder((s) => s === 'desc' ? 'asc' : 'desc')}
+          className="flex items-center gap-2 px-4 py-3 bg-white hover:bg-cream-100 dark:bg-neutral-900 dark:hover:bg-violet-950 text-black dark:text-violet-50 font-bold border-3 border-black dark:border-violet-200 rounded-xl text-xs sm:text-sm transition-all active:scale-95 shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(221,214,254,0.22)]"
+        >
+          {sortOrder === 'desc' ? <ArrowDownAZ size={16} /> : <ArrowUpAZ size={16} />}
+          {sortOrder === 'desc' ? 'Terbaru' : 'Terlama'}
         </button>
       </div>
 
