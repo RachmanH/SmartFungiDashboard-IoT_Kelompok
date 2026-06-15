@@ -3,7 +3,7 @@ import MainLayout from '../layouts/MainLayout';
 import Dashboard from '../pages/Dashboard';
 import History from '../pages/History';
 import Analytics from '../pages/Analytics';
-import Settings from '../pages/Settings';
+import About from '../pages/About';
 
 export default function AppRoutes() {
   return (
@@ -13,7 +13,7 @@ export default function AppRoutes() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/riwayat" element={<History />} />
           <Route path="/analitik" element={<Analytics />} />
-          <Route path="/pengaturan" element={<Settings />} />
+          <Route path="/tentang" element={<About />} />
         </Routes>
       </MainLayout>
     </BrowserRouter>

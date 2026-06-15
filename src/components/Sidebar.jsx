@@ -1,11 +1,11 @@
 import { Link, useLocation } from 'react-router-dom';
-import { BarChart3, Bird, History, LayoutDashboard, Settings } from 'lucide-react';
+import { BarChart3, Bird, History, Info, LayoutDashboard } from 'lucide-react';
 
 const navItems = [
   { to: '/', label: 'Dashboard', icon: LayoutDashboard },
   { to: '/riwayat', label: 'Riwayat', icon: History },
   { to: '/analitik', label: 'Analitik', icon: BarChart3 },
-  { to: '/pengaturan', label: 'Pengaturan', icon: Settings },
+  { to: '/tentang', label: 'Tentang', icon: Info },
 ];
 
 export default function Sidebar({ desktopOpen, mobileOpen, onCloseMobile }) {
