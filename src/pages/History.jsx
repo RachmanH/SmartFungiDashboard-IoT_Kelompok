@@ -83,7 +83,7 @@ export default function History() {
           {STATUS_OPTIONS.map((s) => <option key={s} value={s}>{s}</option>)}
         </select>
         <button
-          onClick={() => exportCsv(filtered)}
+          onClick={() => exportCsv(filtered, startDate, endDate)}
           disabled={!filtered.length}
           className="flex items-center gap-2 px-4 py-3 bg-green-400 hover:bg-green-500 dark:bg-emerald-500 dark:hover:bg-emerald-400 disabled:opacity-50 text-black font-bold border-3 border-black dark:border-emerald-100 rounded-xl text-xs sm:text-sm transition-all active:scale-95 shadow-neo-sm dark:shadow-[2px_2px_0px_0px_rgba(167,243,208,0.25)]"
         >
@@ -126,6 +126,12 @@ export default function History() {
           {sortOrder === 'desc' ? 'Terbaru' : 'Terlama'}
         </button>
       </div>
+
+      {(startDate || endDate) && (
+        <p className="text-xs sm:text-sm font-bold text-gray-600 dark:text-violet-200/70">
+          Menampilkan data dari <span className="text-amber-600 dark:text-amber-300">{startDate || 'awal'}</span> sampai <span className="text-amber-600 dark:text-amber-300">{endDate || 'sekarang'}</span> ({filtered.length} data)
+        </p>
+      )}
 
       {/* Table */}
       <HistoryTable data={paginated} maxRows={PAGE_SIZE} />
